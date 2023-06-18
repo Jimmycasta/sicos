@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes</title>
+    <link th:insert="~{/fragments/bootstrap::bootstrap}">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="~{/fragments/navbar::navbar}"></header>
+<br>
+<div class="container">
+    <div class="text-secondary">
+    <h5>Fecha cuenta cobro</h5>
+    </div>
+    <hr>
+    <div th:if="${mensaje != null}" class="alert alert-success" th:text="${mensaje}" role="alert"></div>
+    <br>
+    <div class="card bg-light">
+        <div class="card-body">
+            <form th:action="@{/reportes/detalleReportes}" th:object="${reportes}" method="post">
+                <div class="row">
+                    <div class="col-sm-3 mb-3 text-center">
+                        <label for="fechaInicio">Fecha Inicio</label>
+                        <input type="date" name="fechaInicio" id="fechaInicio" class="form-control" style="text-align: center"
+                               th:value="${reportes.getFechaInicio()}">
+                    </div>
+                    <div class="col-sm-3 mb-3 text-center">
+                        <label for="fechaFin">Fecha Fin</label>
+                        <input type="date" name="fechaFin" id="fechaFin" class="form-control" style="text-align: center"
+                               th:value="${reportes.getFechaFin()}">
+                    </div>
+
+                </div>
+                <div class="col-12  pb-2">
+                    <button type="submit" class="btn btn-primary">Calcular</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<footer th:insert="~{/fragments/footer::footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

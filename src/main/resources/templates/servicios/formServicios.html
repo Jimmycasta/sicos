@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Servicio</title>
+    <link th:insert="~{/fragments/bootstrap::bootstrap}">
+</head>
+<body>
+<header th:insert="~{/fragments/navbar::navbar}"></header>
+
+<br>
+<div class="container">
+    <div class="text-secondary">
+        <h5>Registro nuevo servicio</h5>
+    </div>
+    <hr>
+    <div>
+    <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="Regresar">Regresar</a>
+    </div>
+    <br>
+    <div class="card bg-light">
+        <div class="card-body">
+            <form class="row g-3 needs-validation" novalidate th:action="@{/servicios/guardar}" th:object="${servicios}"
+                  method="post">
+
+                <div class="col-sm-2">
+                    <label for="fechaAtencion" class="form-label">Fecha atención</label>
+                    <input type="date" class="form-control" name="fechaAtencion" id="fechaAtencion"
+                           th:value="*{getFechaAtencion()}" required>
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="fechaSolucion" class="form-label">Fecha solución</label>
+                    <input type="date" class="form-control" name="fechaSolucion" id="fechaSolucion"
+                           th:value="*{getFechaSolucion()}" required>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario" aria-describedby="usuario"
+                           th:field="*{usuario}" required>
+                    <small th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
+                           class="form-text text-danger"></small>
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="ticket" class="form-label">Ticket</label>
+                    <input type="text" class="form-control" id="ticket" aria-describedby="ticket" th:field="*{ticket}"
+                           required>
+                    <small th:if="${#fields.hasErrors('ticket')}" th:errors="*{ticket}"
+                           class="form-text text-danger"></small>
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" th:field="*{estado.id}" id="estado" required>
+                        <option th:each="estado : ${estado}" th:value="${estado.id}" th:text="${estado.nombre}">
+                            Resuelto
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3 col-sm-6">
+                    <br>
+                    <label for="motivo" class="form-label">Motivo MIA</label>
+                    <textarea class="form-control" id="motivo" rows="7" style="resize: none"
+                              th:field="*{motivoMia}"> </textarea>
+                    <small th:if="${#fields.hasErrors('motivoMia')}" th:errors="*{motivoMia}"
+                           class="form-text text-danger"></small>
+                </div>
+
+                <div class="mb-3 col-sm-6">
+                    <br>
+                    <label for="solucion" class="form-label">Solución</label>
+                    <textarea class="form-control" id="solucion" rows="7" style="resize: none"
+                              th:field="*{solucion}"> </textarea>
+                    <small th:if="${#fields.hasErrors('solucion')}" th:errors="*{solucion}"
+                           class="form-text text-danger"></small>
+                </div>
+
+
+                <div class="col-12 ps-5 pb-4">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:insert="~{/fragments/footer::footer}"></footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

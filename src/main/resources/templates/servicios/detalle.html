@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Servicio</title>
+    <link th:insert="~{/fragments/bootstrap::bootstrap}">
+</head>
+<body>
+<header th:insert="~{/fragments/navbar::navbar}"></header>
+<br>
+<div class="container ">
+    <div>
+        <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="regresar">Regresar</a>
+    </div>
+    <br>
+    <div class="card bg-light">
+        <div class="card-header">
+            <h5 class="align-middle ms-2">Detalle Servicio</h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6 class="card-title"><strong>Usuario:&nbsp;</strong>
+                        <span th:text="${servicio.usuario}"></span>
+                    </h6>
+                    <h6 class="card-title"><strong>Ticket:&nbsp;</strong>
+                        <span th:text="${servicio.ticket}"></span>
+                    </h6>
+                    <h6 class="card-title"><strong>Fecha Atención:&nbsp;</strong>
+                        <span th:text="${servicio.fechaAtencion}"></span>
+                    </h6>
+                    <h6 class="card-title"><strong>Fecha Solución:&nbsp;</strong>
+                        <span th:text="${servicio.fechaSolucion}"></span>
+                    </h6>
+                    <h6 class="card-title"><strong>Estado:&nbsp;</strong>
+                        <span th:if="${servicio.estado.id == 1}"
+                              class="badge text-bg-warning"><strong>Pendiente</strong></span>
+                        <span th:if="${servicio.estado.id == 2}"
+                              class="badge text-bg-success"><strong>Resuelto</strong></span>
+                    </h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer th:insert="~{/fragments/footer::footer}">
+
+</footer>
+</body>
+</html>

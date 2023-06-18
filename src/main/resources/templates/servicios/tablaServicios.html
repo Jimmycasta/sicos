@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Servicios Presente</title>
+    <link th:insert="~{/fragments/bootstrap::bootstrap}">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+</head>
+<body>
+<main>
+    <header th:insert="~{/fragments/navbar::navbar}"></header>
+    <br>
+    <div class="container">
+        <div class="container">
+            <div class="text-secondary">
+                <h5>Lista servicios Presente</h5>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <a class="btn btn-primary" th:href="@{/servicios/registro}" title="Registrar servicio" role="button">Registrar
+                Servicio</a>
+        </div>
+        <br>
+        <div th:if="${mensaje != null}" class="alert alert-success" th:text="${mensaje}" role="alert"></div>
+
+        <div class="row">
+            <table class="table table-striped table-hover table-sm table-bordered ">
+                <thead>
+                <tr class="table table-warning text-center">
+                    <th>Fec.Atención</th>
+                    <th>Fec.Solución</th>
+                    <th class="w-25">Usuario</th>
+                    <th>Ticket</th>
+                    <th>MotivoMIA</th>
+                    <th>Solución</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="servicios : ${listaServicios}">
+                    <td class="text-center align-middle" th:text="${servicios.fechaAtencion}"></td>
+                    <td class="text-center align-middle" th:text="${servicios.fechaSolucion}"></td>
+                    <td class="align-middle" th:text="${servicios.usuario}"></td>
+                    <td class="text-center align-middle" th:text="${servicios.ticket}"></td>
+                    <td class="align-middle" th:text="${servicios.motivoMia}"></td>
+                    <td class="align-middle" th:text="${servicios.solucion}"></td>
+                    <td class="text-center align-middle" th:text="${servicios.estado.nombre}"></td>
+                    <td class="text-center align-middle">
+                        <a th:href="@{/servicios/detalle/{id} (id = ${servicios.id})}" class="btn btn-success btn-sm"
+                           role="button" title="Detalle">
+                            <i class="fas fa-pencil-alt"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer th:insert="~{/fragments/footer::footer}"></footer>
+</body>
+
+</html>
