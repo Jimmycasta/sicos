@@ -4,9 +4,9 @@ import com.sicos.entity.Reportes;
 import com.sicos.repository.ReportesRepository;
 import com.sicos.service.IReportesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +22,13 @@ public class ReporteService implements IReportesService {
     }
 
     @Override
-    public Reportes buscarPorId(int id) {
+    public List<Reportes> buscarCuentaCobroPorId(int id) {
+
+        List<Reportes> lista = new ArrayList<>();
         Optional<Reportes> optional = reportesRepository.findById(id);
         if (optional.isPresent()) {
-            return optional.get();
+            lista.add(optional.get());
+            return lista;
         }
         return null;
     }
@@ -43,6 +46,12 @@ public class ReporteService implements IReportesService {
     @Override
     public String buscarMaxNumeroFactura() {
         return reportesRepository.findMaxNumeroFactura();
+    }
+
+
+    @Override
+    public Reportes buscarPorCuentcaCobro(String cuentaCobro) {
+       return reportesRepository.findByNumeroFactura(cuentaCobro);
     }
 
 }

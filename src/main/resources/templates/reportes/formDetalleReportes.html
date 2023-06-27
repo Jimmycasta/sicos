@@ -17,12 +17,12 @@
     </div>
     <hr>
     <div>
-        <a class="btn btn-primary" th:href="@{/reportes/fechaReporte}" role="button" title="Regresar a fecha de cobro">Regresar</a>
+        <a class="btn btn-primary" th:href="@{/reportes/fecha}" role="button" title="Regresar a fecha de cobro">Regresar</a>
     </div>
     <br>
     <div class="card bg-light">
         <div class="card-body">
-            <form th:action="@{/reportes/guardarReportes}" th:object="${reportesDatos}" method="post">
+            <form th:action="@{/reportes/guardar}" th:object="${reportesDatos}" method="post">
                 <div class="row">
                     <div class="col-sm-3 mb-3 text-center">
                         <label for="numeroFactura">Cuenta cobro #</label>

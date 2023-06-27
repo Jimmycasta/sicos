@@ -1,37 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c86e3d4-f681-4175-80e4-0663d4dafa94">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CuentaCobro" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="56" bottomMargin="56" uuid="e8db123b-7d07-4165-8ea2-e7eb5edc0006">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="firma" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="numeroFactura" class="java.lang.String"/>
+	<field name="totalCuentaCobro" class="java.lang.Double"/>
+	<field name="diasTrabajados" class="java.lang.Integer"/>
+	<field name="mesFacturado" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="100" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<staticText>
-				<reportElement x="270" y="41" width="160" height="29" uuid="aab417b4-d12b-4d21-a4df-19ca36345bea"/>
-				<text><![CDATA[Cuenta de Cobro]]></text>
+				<reportElement x="142" y="50" width="158" height="60" uuid="228c477d-8abb-438a-b060-52e32847d89a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Cuenta de cobro                              FONDO PRESENTE]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="69" height="20" uuid="f05ac3dc-2057-4376-8bf0-f06a58897bab"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="124" height="30" uuid="c35ed577-5a59-4bf0-b7da-56eb9db9006e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="&quot;$#,###,###&quot;" isBlankWhenNull="true">
+				<reportElement x="366" y="20" width="74" height="20" uuid="d80b427e-f1cd-4a7c-9e98-46a7ea9ac3e5"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+					<paragraph lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroFactura}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="106" y="0" width="230" height="55" uuid="b9dba8c4-e3d5-499e-a366-06477789a2ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Debe a:                                                                                                  Jimmy Antonio Castaneda Sanchez                                                Cedula 71761837 Medellin]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="329" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="20" width="80" height="20" uuid="1b88b790-9626-4353-b6ea-5803f44e969f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[La suma de:]]></text>
+			</staticText>
+			<textField pattern="&quot;$#,###,###&quot;">
+				<reportElement x="124" y="40" width="194" height="30" uuid="c25f2e9b-c418-4448-a999-ce9eebfa20ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalCuentaCobro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-5" y="80" width="99" height="20" uuid="0748de8f-1860-49eb-8b60-89def1e09137"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Por concepto de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="100" width="115" height="19" uuid="d9ad0c9e-3e83-42a3-8c56-50ea81bd30f8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Servicios técnicos de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="100" width="15" height="19" uuid="032c7439-d45e-4ba1-a9c1-f4ba99cbaff3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diasTrabajados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="125" y="100" width="235" height="19" uuid="42f8888f-450d-4dbd-a9a0-e1e1b8f7113f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[dias laborados que corresponden al mes de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="170" width="445" height="149" uuid="1f638267-7f3b-4a92-9a46-1fb8fff028b7"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nota:                                                                                                                                                                            En cumplimiento a lo dispuesto en el parágrafo 2 del artículo 383 del estatuto tributario, modificado ´por la ley 1819 de 2016, de manera libre y espontánea bajo la gravedad de juramento y con el fin de establecer la clasificación tributaria para efectos de retención en la fuente, manifiesto que:
+Mis ingresos provienen de la prestación de servicios de manera personal.
+En el presente año gravable no he contratado o vinculado más de un trabajador para la prestación del servicio contratado con ustedes.
+Igualmente manifiesto mi compromiso de informar a ustedes si en el presente año gravable alguna de las condiciones mencionadas precisamente se modifica de manera que los ingresos derivados del servicio prestado no pueden ser considerados como rentas de trabajo.                      
+Por lo tanto, no estoy sujeto a retención en la fuente a título de impuesto sobre la renta.
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="100" width="80" height="19" uuid="e2a093e3-24ec-4cd1-8e87-cd6ef270469c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mesFacturado}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement x="-5" y="96" width="210" height="40" uuid="0ab2e6e0-916e-4bd7-bc53-d38fc952c3a6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Jimmy Antonio Castaneda sanchéz                  Cedula 71761837]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="46" width="141" height="50" uuid="948d667a-773a-4025-95c3-7a4bd5ffd03c"/>
+				<imageExpression><![CDATA[$P{firma}]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

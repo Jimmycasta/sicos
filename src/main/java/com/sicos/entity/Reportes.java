@@ -21,4 +21,7 @@ public class Reportes {
     private int miasAtendidos;
     private String mesFacturado;
     private double totalCuentaCobro;
+
+    public Reportes() {
+    }
 }

@@ -19,4 +19,6 @@ public interface IServiciosService {
     int diasTrabajados(LocalDate fechaInicio, LocalDate fechaFin);
 
     int contarTicket(LocalDate fechaInicio, LocalDate fechaFin);
+
+
 }

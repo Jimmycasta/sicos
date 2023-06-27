@@ -7,14 +7,12 @@ import com.sicos.utilities.Fecha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reportes")
@@ -24,14 +22,14 @@ public class ReportesController {
     @Autowired
     private IReportesService reportesService;
 
-    @GetMapping("/fechaReporte")
+    @GetMapping("/fecha")
     public String fechaReporte(@ModelAttribute("reportes") Reportes reportes) {
         reportes.setFechaInicio(YearMonth.now().minusMonths(1).atDay(1));
         reportes.setFechaFin(YearMonth.now().minusMonths(1).atEndOfMonth());
         return "reportes/fechaReporte";
     }
 
-    @PostMapping("/detalleReportes")
+    @PostMapping("/detalle")
     public String detalleReportes(Reportes reportes, Model model) {
         reportes.setFechaInicio(reportes.getFechaInicio());
         reportes.setFechaFin(reportes.getFechaFin());
@@ -50,13 +48,22 @@ public class ReportesController {
         return "reportes/formDetalleReportes";
     }
 
-    @PostMapping("/guardarReportes")
+    @PostMapping("/guardar")
     public String guardarReporte(Reportes reportesDatos, RedirectAttributes attributes) {
         reportesService.guardar(reportesDatos);
         attributes.addFlashAttribute("mensaje", "Cuenta de cobro guardada!");
-        return "redirect:/reportes/fechaReporte";
+        return "redirect:/reportes/listar";
+    }
+    @GetMapping("/listar")
+    public String listarCuentaCobro(Model model){
+        List<Reportes>listaReportes = reportesService.buscarTodos();
+        model.addAttribute("listaReportes",listaReportes);
+        return "reportes/listarCuentaCobro";
     }
 
+
+
+    //Método para generar el número consecutivo de Cuenta cobro.
     public String getNumeroFactura() {
 
         String numeroFactura = reportesService.buscarMaxNumeroFactura();
