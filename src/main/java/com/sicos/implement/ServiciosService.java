@@ -52,4 +52,9 @@ public class ServiciosService implements IServiciosService {
         return serviciosRepository.getContarTicket(fechaInicio, fechaFin);
     }
 
+    @Override
+    public List<Servicios> buscarUltimoMes(LocalDate fechaInicio, LocalDate fechaFin) {
+        return serviciosRepository.getUltimoMes(fechaInicio,fechaFin);
+    }
+
 }

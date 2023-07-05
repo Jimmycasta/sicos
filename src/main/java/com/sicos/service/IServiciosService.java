@@ -20,5 +20,6 @@ public interface IServiciosService {
 
     int contarTicket(LocalDate fechaInicio, LocalDate fechaFin);
 
+    List<Servicios> buscarUltimoMes(LocalDate fechaInicio, LocalDate fechaFin);
 
 }

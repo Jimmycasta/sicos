@@ -9,17 +9,46 @@
 <header th:insert="~{/fragments/navbar::navbar}"></header>
 <br>
 <div class="container">
-    <div class="card p-3 bg-light">
+    <div class="card bg-light">
         <div class="card-body">
-            <h3 class="card-title">Sicos</h3>
-            <h4 class="card-title">Sistema de control de servicios</h4>
-        </div>
 
+                <div class="d-flex justify-content-between bg-light">
+
+                <div class="text-secondary">
+                    <h3>Sicos</h3>
+                    <h2>Sistema de Control de Servicios</h2>
+                </div>
+
+
+                <div class="col-3 list-group">
+                    <div class="card-header bg-primary" style="color: white">
+                        Facturación en curso
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Dias trabajados
+                            <span th:text="${serviciosHoy.getDiasTrabajados()}" class="badge bg-primary rounded-pill"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tickets Resueltos
+                            <span th:text="${serviciosHoy.getMiasAtendidos()}" class="badge bg-primary rounded-pill"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total Facturado
+                            <span th:text="${totalFacturado}" class="badge bg-primary rounded-pill"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                </div>
+
+
+
+
+        </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+<link th:insert="~{/fragments/javascript::link}">
+<script th:insert="~{/fragments/javascript::script}"></script>
 </body>
 </html>

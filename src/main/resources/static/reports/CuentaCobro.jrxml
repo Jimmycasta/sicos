@@ -106,11 +106,11 @@
 				<textFieldExpression><![CDATA[$F{diasTrabajados}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="125" y="100" width="235" height="19" uuid="42f8888f-450d-4dbd-a9a0-e1e1b8f7113f"/>
+				<reportElement x="125" y="100" width="225" height="19" uuid="42f8888f-450d-4dbd-a9a0-e1e1b8f7113f"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[dias laborados que corresponden al mes de]]></text>
+				<text><![CDATA[ dias laborados que corresponden al mes de ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="-5" y="170" width="445" height="149" uuid="1f638267-7f3b-4a92-9a46-1fb8fff028b7"/>
@@ -125,7 +125,7 @@ Por lo tanto, no estoy sujeto a retención en la fuente a título de impuesto so
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="360" y="100" width="80" height="19" uuid="e2a093e3-24ec-4cd1-8e87-cd6ef270469c"/>
+				<reportElement x="350" y="100" width="80" height="19" uuid="e2a093e3-24ec-4cd1-8e87-cd6ef270469c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>

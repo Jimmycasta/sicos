@@ -1,6 +1,5 @@
 package com.sicos.repository;
 
-import com.sicos.entity.Reportes;
 import com.sicos.entity.Servicios;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
-
 
 public interface ServiciosRepository extends JpaRepository<Servicios, Integer> {
 
@@ -19,8 +17,7 @@ public interface ServiciosRepository extends JpaRepository<Servicios, Integer> {
     @Query(value = "select count(ticket) from servicios s where s.fechaSolucion between :fechaInicio and :fechaFin", nativeQuery = true)
      int getContarTicket(@Param("fechaInicio") LocalDate fechaInicio, @Param("fechaFin") LocalDate fechaFin);
 
-
-
-
+    @Query(value = "select * from servicios s where s.fechaSolucion between :fechaInicio and :fechaFin", nativeQuery = true)
+    List<Servicios> getUltimoMes(@Param("fechaInicio") LocalDate fechaInicio, @Param("fechaFin") LocalDate fechaFin);
 
 }

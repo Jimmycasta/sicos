@@ -5,6 +5,8 @@ import java.time.Month;
 
 public class Fecha {
 
+    //Este método se usa para sacar el mes en letras de una fecha dada,
+
     public static String getMes(LocalDate fecha) {
 
         String mes = null;

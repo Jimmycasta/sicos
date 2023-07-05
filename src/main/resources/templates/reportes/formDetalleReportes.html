@@ -13,7 +13,7 @@
 <br>
 <div class="container">
     <div class="text-secondary">
-        <h5>Resumen cuenta de cobro</h5>
+        <h5>Detalle Factura</h5>
     </div>
     <hr>
     <div>
@@ -25,7 +25,7 @@
             <form th:action="@{/reportes/guardar}" th:object="${reportesDatos}" method="post">
                 <div class="row">
                     <div class="col-sm-3 mb-3 text-center">
-                        <label for="numeroFactura">Cuenta cobro #</label>
+                        <label for="numeroFactura">Factura</label>
                         <input type="text" name="numeroFactura" id="numeroFactura" class="form-control"
                                style="text-align: center"
                                th:value="${nextNumeroFactura}" readonly>
@@ -91,12 +91,8 @@
 </div>
 <br>
 <footer th:insert="~{/fragments/footer::footer}"></footer>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
-        crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>
 </html>

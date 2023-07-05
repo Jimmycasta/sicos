@@ -2,6 +2,7 @@ package com.sicos.service;
 
 import com.sicos.entity.Reportes;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,5 @@ public interface IReportesService {
     String buscarMaxNumeroFactura();
 
     Reportes buscarPorCuentcaCobro(String cuentaCobro);
-
 
 }
