@@ -10,16 +10,14 @@
 <br>
 <div class="container ">
     <div>
-        <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="regresar">Regresar</a>
+        <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="regresar" style="font-size: 14px;">Regresar</a>
     </div>
     <br>
     <div class="card bg-light">
         <div class="card-header">
-            <h5 class="align-middle ms-2">Detalle Servicio</h5>
+            <h6 class="align-middle ms-2">Detalle servicio</h6>
         </div>
-
         <div class="card-body">
-
             <div class="card mb-3">
                 <div class="card-body">
                     <h6 class="card-title"><strong>Usuario:&nbsp;</strong>
@@ -35,9 +33,9 @@
                         <span th:text="${servicio.fechaSolucion}"></span>
                     </h6>
                     <h6 class="card-title"><strong>Estado:&nbsp;</strong>
-                        <span th:if="${servicio.estado.id == 1}"
-                              class="badge text-bg-warning"><strong>Pendiente</strong></span>
                         <span th:if="${servicio.estado.id == 2}"
+                              class="badge text-bg-warning"><strong>Pendiente</strong></span>
+                        <span th:if="${servicio.estado.id == 1}"
                               class="badge text-bg-success"><strong>Resuelto</strong></span>
                     </h6>
                 </div>

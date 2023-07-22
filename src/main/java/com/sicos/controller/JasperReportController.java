@@ -18,15 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.swing.text.Utilities;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +42,7 @@ public class JasperReportController {
     public void exportaPdf(HttpServletResponse response, @PathVariable("factura") String factura) throws IOException, JRException {
 
         //trae los datos de la base de datos y se la pasa a una List.
-        Reportes reportes = reportesService.buscarPorCuentcaCobro(factura);
+        Reportes reportes = reportesService.buscarPorCuentaCobro(factura);
         List<Reportes> dataList = new ArrayList<>();
         dataList.add(reportes);
 
@@ -116,13 +113,11 @@ public class JasperReportController {
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String fecha = fechaActual.format(formatoFecha);
-
-        //Se pone el nombre del archivo.
         String nombreArchivo = "CuentaCobro" + "_" + fecha + ".xlsx";
-        response.setHeader("Content-Disposition", "attachment; filename=" + nombreArchivo);
+
+        //Especifica tipo de contenido a excel y se fuerza la descarga del archivo.
         response.setContentType("application/vnd.ms-excel");
-        //response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        //response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=" + nombreArchivo);
 
         //Se configura los parametros del archivo xlsx a exportar.
         JRXlsxExporter exporter = new JRXlsxExporter();

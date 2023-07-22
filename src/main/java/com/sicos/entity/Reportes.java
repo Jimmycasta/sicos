@@ -20,6 +20,7 @@ public class Reportes {
     private int diasTrabajados;
     private int miasAtendidos;
     private String mesFacturado;
+    @Column(columnDefinition = "double")
     private double totalCuentaCobro;
 
     public Reportes() {

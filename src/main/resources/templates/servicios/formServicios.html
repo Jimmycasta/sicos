@@ -15,24 +15,24 @@
     </div>
     <hr>
     <div>
-    <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="Regresar">Regresar</a>
+    <a class="btn btn-primary" th:href="@{/servicios/lista}" role="button" title="Regresar" style="font-size: 14px">Regresar</a>
     </div>
     <br>
-    <div class="card bg-light">
+    <div class="card bg-light" style="font-size: 14px">
         <div class="card-body">
             <form class="row g-3 needs-validation" novalidate th:action="@{/servicios/guardar}" th:object="${servicios}"
-                  method="post">
+                  method="post" style="font-size: 14px">
 
                 <div class="col-sm-2">
                     <label for="fechaAtencion" class="form-label">Fecha atención</label>
-                    <input type="date" class="form-control" name="fechaAtencion" id="fechaAtencion"
-                           th:value="*{getFechaAtencion()}" required>
+                    <input type="date" class="form-control"  name="fechaAtencion" id="fechaAtencion"
+                           th:value="*{getFechaAtencion()} " style="font-size: 14px;"required>
                 </div>
 
                 <div class="col-sm-2">
                     <label for="fechaSolucion" class="form-label">Fecha solución</label>
                     <input type="date" class="form-control" name="fechaSolucion" id="fechaSolucion"
-                           th:value="*{getFechaSolucion()}" required>
+                           th:value="*{getFechaSolucion()}" style="font-size: 14px;" required>
                 </div>
 
                 <div class="col-sm-4">
@@ -40,12 +40,12 @@
                     <input type="text" class="form-control" id="usuario" aria-describedby="usuario"
                            th:field="*{usuario}" required>
                     <small th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
-                           class="form-text text-danger"></small>
+                           class="form-text text-danger" style="font-size: 14px;"></small>
                 </div>
 
                 <div class="col-sm-2">
                     <label for="ticket" class="form-label">Ticket</label>
-                    <input type="text" class="form-control" id="ticket" aria-describedby="ticket" th:field="*{ticket}"
+                    <input type="text" class="form-control" id="ticket" aria-describedby="ticket" th:field="*{ticket}" style="font-size: 14px;"
                            required>
                     <small th:if="${#fields.hasErrors('ticket')}" th:errors="*{ticket}"
                            class="form-text text-danger"></small>
@@ -53,23 +53,23 @@
 
                 <div class="col-sm-2">
                     <label for="estado" class="form-label">Estado</label>
-                    <select class="form-select" th:field="*{estado.id}" id="estado" required>
+                    <select class="form-select" th:field="*{estado.id}" id="estado" style="font-size: 14px;" required>
                         <option th:each="estado : ${estado}" th:value="${estado.id}" th:text="${estado.nombre}">
                             Resuelto
                         </option>
                     </select>
                 </div>
 
-                <div class="mb-3 col-sm-6">
+                <div class="mb-1 col-sm-6">
                     <br>
                     <label for="motivo" class="form-label">Motivo MIA</label>
-                    <textarea class="form-control" id="motivo" rows="7" style="resize: none"
-                              th:field="*{motivoMia}"> </textarea>
+                    <textarea class="form-control"  id="motivo" rows="7" style="resize: none"
+                              th:field="*{motivoMia}" > </textarea>
                     <small th:if="${#fields.hasErrors('motivoMia')}" th:errors="*{motivoMia}"
                            class="form-text text-danger"></small>
                 </div>
 
-                <div class="mb-3 col-sm-6">
+                <div class="mb-1 col-sm-6">
                     <br>
                     <label for="solucion" class="form-label">Solución</label>
                     <textarea class="form-control" id="solucion" rows="7" style="resize: none"
@@ -79,8 +79,8 @@
                 </div>
 
 
-                <div class="col-12 ps-5 pb-4">
-                    <button class="btn btn-primary" type="submit">Guardar</button>
+                <div class="mb-2 col-sm-6">
+                    <button class="btn btn-primary" type="submit" style="font-size: 14px;">Guardar</button>
                 </div>
 
             </form>

@@ -12,29 +12,28 @@
 <br>
 <div class="container">
     <div class="text-secondary">
-    <h5>Fecha a Facturar</h5>
+    <h5>Fecha a facturar</h5>
     </div>
     <hr>
-    <div th:if="${mensaje != null}" class="alert alert-success" th:text="${mensaje}" role="alert"></div>
-    <br>
-    <div class="card bg-light">
+    <div th:if="${mensaje != null}" class="alert alert-danger" th:text="${mensaje}" role="alert"></div>
+    <div class="card bg-light" style="font-size: 14px">
         <div class="card-body">
             <form th:action="@{/reportes/detalle}" th:object="${reportes}" method="post">
                 <div class="row">
-                    <div class="col-sm-3 mb-3 text-center">
+                    <div class="col-sm-2 mb-3 text-center">
                         <label for="fechaInicio">Fecha Inicio</label>
-                        <input type="date" name="fechaInicio" id="fechaInicio" class="form-control" style="text-align: center"
-                               th:value="${reportes.getFechaInicio()}">
+                        <input type="date" name="fechaInicio" id="fechaInicio" class="form-control" style="text-align: center; font-size: 14px"
+                               th:value="${reportes.getFechaInicio()}" >
                     </div>
-                    <div class="col-sm-3 mb-3 text-center">
+                    <div class="col-sm-2 mb-3 text-center">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input type="date" name="fechaFin" id="fechaFin" class="form-control" style="text-align: center"
+                        <input type="date" name="fechaFin" id="fechaFin" class="form-control" style="text-align: center;font-size: 14px"
                                th:value="${reportes.getFechaFin()}">
                     </div>
 
                 </div>
                 <div class="col-12  pb-2">
-                    <button type="submit" class="btn btn-primary">Calcular</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 14px">Calcular</button>
                 </div>
 
             </form>

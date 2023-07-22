@@ -36,4 +36,6 @@ public class HomeController {
         model.addAttribute("totalFacturado", totalFacturado);
         return "home";
     }
+
+
 }

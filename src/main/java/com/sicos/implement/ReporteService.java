@@ -6,7 +6,6 @@ import com.sicos.service.IReportesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +15,7 @@ public class ReporteService implements IReportesService {
 
     @Autowired
     private ReportesRepository reportesRepository;
+
 
     @Override
     public List<Reportes> buscarTodos() {
@@ -46,13 +46,22 @@ public class ReporteService implements IReportesService {
 
     @Override
     public String buscarMaxNumeroFactura() {
+
         return reportesRepository.findMaxNumeroFactura();
     }
 
+    @Override
+    public Reportes buscarPorCuentaCobro(String cuentaCobro) {
+
+        Optional<Reportes> optional = Optional.ofNullable(reportesRepository.findByNumeroFactura(cuentaCobro));
+        return optional.orElseGet(() -> reportesRepository.findByNumeroFactura(cuentaCobro));
+
+    }
 
     @Override
-    public Reportes buscarPorCuentcaCobro(String cuentaCobro) {
-       return reportesRepository.findByNumeroFactura(cuentaCobro);
+    public List<String> buscarFechaInicio() {
+        return reportesRepository.getFechaFin();
     }
+
 
 }

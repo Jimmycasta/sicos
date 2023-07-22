@@ -15,7 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/reportes")
@@ -33,22 +35,33 @@ public class ReportesController {
     }
 
     @PostMapping("/detalle")
-    public String detalleReportes(Reportes reportes, Model model) {
-        reportes.setFechaInicio(reportes.getFechaInicio());
-        reportes.setFechaFin(reportes.getFechaFin());
-        reportes.setFechaReporte(LocalDate.now());
-        reportes.setDiasTrabajados(serviciosService.diasTrabajados(reportes.getFechaInicio(), reportes.getFechaFin()));
-        reportes.setMiasAtendidos(serviciosService.contarTicket(reportes.getFechaInicio(), reportes.getFechaFin()));
-        reportes.setMesFacturado(Fecha.getMes(reportes.getFechaFin()));
-        reportes.setNumeroFactura(reportes.getNumeroFactura());
-        String nextNumeroFactura = getNumeroFactura();
-        int diasTrabajados = reportes.getDiasTrabajados();
-        double tarifaServicio = 90000;
-        double totalCuentaCobro = diasTrabajados * tarifaServicio;
-        reportes.setTotalCuentaCobro(totalCuentaCobro);
-        model.addAttribute("reportesDatos", reportes);
-        model.addAttribute("nextNumeroFactura", nextNumeroFactura);
-        return "reportes/formDetalleReportes";
+    public String detalleReportes(Reportes reportes, Model model, RedirectAttributes attributes) {
+
+        List<String> listaFechaInicio = reportesService.buscarFechaInicio();
+        String nombreMes = reportes.getFechaInicio().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String fechaNueva = String.valueOf(reportes.getFechaInicio());
+
+        if (!listaFechaInicio.contains(fechaNueva)) {
+            reportes.setFechaInicio(reportes.getFechaInicio());
+            reportes.setFechaFin(reportes.getFechaFin());
+            reportes.setFechaReporte(LocalDate.now());
+            reportes.setDiasTrabajados(serviciosService.diasTrabajados(reportes.getFechaInicio(), reportes.getFechaFin()));
+            reportes.setMiasAtendidos(serviciosService.contarTicket(reportes.getFechaInicio(), reportes.getFechaFin()));
+            reportes.setMesFacturado(Fecha.getMes(reportes.getFechaFin()));
+            reportes.setNumeroFactura(reportes.getNumeroFactura());
+            String nextNumeroFactura = getNumeroFactura();
+            int diasTrabajados = reportes.getDiasTrabajados();
+            double tarifaServicio = 90000;
+            double totalCuentaCobro = diasTrabajados * tarifaServicio;
+            reportes.setTotalCuentaCobro(totalCuentaCobro);
+            model.addAttribute("reportesDatos", reportes);
+            model.addAttribute("nextNumeroFactura", nextNumeroFactura);
+            return "reportes/formDetalleReportes";
+
+        } else {
+            attributes.addFlashAttribute("mensaje", "El mes de " + nombreMes + " ya fue facturado!");
+            return "redirect:/reportes/fecha";
+        }
     }
 
     @PostMapping("/guardar")
@@ -67,21 +80,17 @@ public class ReportesController {
 
     //Método para generar el número consecutivo de Cuenta cobro.
     public String getNumeroFactura() {
-
         String numeroFactura = reportesService.buscarMaxNumeroFactura();
 
         if (numeroFactura == null) {
-            numeroFactura = "00001";
+            numeroFactura = String.format("%04d", + 1);
 
         } else {
-
-            int consecutivo = Integer.parseInt(numeroFactura);
-            consecutivo += 1;
-            numeroFactura = "0000" + consecutivo;
+            int num = Integer.parseInt(numeroFactura);
+            numeroFactura = String.format("%04d", num + 1);
         }
         return numeroFactura;
     }
-
 }
 
 
