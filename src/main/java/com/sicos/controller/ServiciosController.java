@@ -6,6 +6,8 @@ import com.sicos.service.IEstadoService;
 import com.sicos.service.IServiciosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/servicios")
@@ -24,10 +29,25 @@ public class ServiciosController {
     @Autowired
     private IEstadoService estadoService;
 
-    @GetMapping("/lista")
-    public String tablaServicios(Model model) {
-        List<Servicios> listaServicios = serviciosService.buscarTodos();
-        model.addAttribute("listaServicios", listaServicios);
+    @GetMapping(value = "/lista")
+    public String tablaServicios(@RequestParam Map<String, Object> params, Model model) {
+
+        //Código para la paginación de la vista tablaServicios.
+        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        Page<Servicios> listaServicios = serviciosService.buscarTodosPage(pageRequest);
+
+        int totalPage = listaServicios.getTotalPages();
+        if (totalPage > 0) {
+            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+        }
+
+        model.addAttribute("listaServicios", listaServicios.getContent());
+        model.addAttribute("current", page + 1);
+        model.addAttribute("next", page + 2);
+        model.addAttribute("prev", page);
+        model.addAttribute("last", totalPage);
         return "servicios/tablaServicios";
     }
 
@@ -51,7 +71,7 @@ public class ServiciosController {
         }
 
         serviciosService.guardar(servicios);
-        attributes.addFlashAttribute("mensaje","Servicio guardado correctamente!");
+        attributes.addFlashAttribute("mensaje", "Servicio guardado correctamente!");
         return "redirect:/servicios/lista";
     }
 

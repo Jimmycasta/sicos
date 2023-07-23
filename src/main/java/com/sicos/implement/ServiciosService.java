@@ -4,6 +4,8 @@ import com.sicos.entity.Servicios;
 import com.sicos.repository.ServiciosRepository;
 import com.sicos.service.IServiciosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +21,11 @@ public class ServiciosService implements IServiciosService {
     @Override
     public List<Servicios> buscarTodos() {
         return serviciosRepository.findAll();
+    }
+
+    @Override
+    public Page<Servicios> buscarTodosPage(Pageable pageable) {
+        return serviciosRepository.findAll(pageable);
     }
 
     @Override
