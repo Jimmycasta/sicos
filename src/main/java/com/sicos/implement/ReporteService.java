@@ -4,6 +4,8 @@ import com.sicos.entity.Reportes;
 import com.sicos.repository.ReportesRepository;
 import com.sicos.service.IReportesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +23,12 @@ public class ReporteService implements IReportesService {
     public List<Reportes> buscarTodos() {
         return reportesRepository.findAll();
     }
+
+    @Override
+    public Page<Reportes> buscarTodosPage(Pageable pageable) {
+        return reportesRepository.findAll(pageable);
+    }
+
 
     @Override
     public List<Reportes> buscarCuentaCobroPorId(int id) {

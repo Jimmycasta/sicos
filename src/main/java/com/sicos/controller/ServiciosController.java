@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,24 +31,23 @@ public class ServiciosController {
     private IEstadoService estadoService;
 
     @GetMapping(value = "/lista")
-    public String tablaServicios(@RequestParam Map<String, Object> params, Model model) {
+    public String tablaServicios(@RequestParam Map<String,Object> params, Model model) {
 
-        //Código para la paginación de la vista tablaServicios.
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+        int page = params.get("page") != null ? (Integer.parseInt(params.get("page").toString()) - 1) : 0;
         PageRequest pageRequest = PageRequest.of(page, 10);
         Page<Servicios> listaServicios = serviciosService.buscarTodosPage(pageRequest);
 
-        int totalPage = listaServicios.getTotalPages();
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+        int totalPages = listaServicios.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pages = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pages", pages);
         }
 
-        model.addAttribute("listaServicios", listaServicios.getContent());
+        model.addAttribute("listaServicios", listaServicios);
         model.addAttribute("current", page + 1);
         model.addAttribute("next", page + 2);
         model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model.addAttribute("last", totalPages);
         return "servicios/tablaServicios";
     }
 

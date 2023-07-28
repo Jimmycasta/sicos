@@ -5,12 +5,11 @@ import com.sicos.service.IReportesService;
 import com.sicos.service.IServiciosService;
 import com.sicos.utilities.Fecha;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -18,6 +17,10 @@ import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/reportes")
@@ -66,24 +69,46 @@ public class ReportesController {
 
     @PostMapping("/guardar")
     public String guardarReporte(Reportes reportesDatos, RedirectAttributes attributes) {
+
         reportesService.guardar(reportesDatos);
         attributes.addFlashAttribute("mensaje", "Cuenta de cobro guardada!");
         return "redirect:/reportes/listar";
     }
 
     @GetMapping("/listar")
+    public String listarCuentaCobro(@RequestParam Map<String,Object> params, Model model) {
+        int currentPage = params.get("page") != null ? (Integer.parseInt(params.get("page").toString()) -1) : 0;
+        int pageSize = 10;
+        PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
+        Page<Reportes> listaReportes = reportesService.buscarTodosPage(pageRequest);
+
+        int totalPages = listaReportes.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("listaReportes", listaReportes);
+        model.addAttribute("currentPage", currentPage + 1);
+        model.addAttribute("nextPage", currentPage + 2);
+        model.addAttribute("prevPage", currentPage);
+        model.addAttribute("lastPage", totalPages);
+        return "reportes/listarCuentaCobro";
+    }
+
+/*    @GetMapping("/listar")
     public String listarCuentaCobro(Model model) {
         List<Reportes> listaReportes = reportesService.buscarTodos();
         model.addAttribute("listaReportes", listaReportes);
         return "reportes/listarCuentaCobro";
     }
+    */
 
     //Método para generar el número consecutivo de Cuenta cobro.
     public String getNumeroFactura() {
         String numeroFactura = reportesService.buscarMaxNumeroFactura();
 
         if (numeroFactura == null) {
-            numeroFactura = String.format("%04d", + 1);
+            numeroFactura = String.format("%04d", +1);
 
         } else {
             int num = Integer.parseInt(numeroFactura);
